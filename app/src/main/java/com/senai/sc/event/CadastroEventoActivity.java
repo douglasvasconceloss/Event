@@ -34,7 +34,6 @@ public class CadastroEventoActivity extends AppCompatActivity {
         String localEvento = editTextLocal.getText().toString();
 
         Evento evento = new Evento(id, nomeEvento,dataEvento,localEvento);
-
         finish();
     }
 }

@@ -7,7 +7,6 @@ public class Evento {
     private String dataEvento;
     private String localEvento;
 
-
     public Evento(int id, String nomeEvento, String dataEvento, String localEvento) {
         this.id = id;
         this.nomeEvento = nomeEvento;

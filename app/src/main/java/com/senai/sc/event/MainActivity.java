@@ -43,5 +43,6 @@ public class MainActivity extends AppCompatActivity {
     public void onClickCriarEvento(View v) {
         Intent intentCriarEvento = new Intent(MainActivity.this, CadastroEventoActivity.class);
         startActivity(intentCriarEvento);
+
     }
 }
