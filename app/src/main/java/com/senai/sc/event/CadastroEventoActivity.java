@@ -9,8 +9,6 @@ import android.widget.EditText;
 
 import com.senai.sc.event.classeEvento.Evento;
 
-import java.time.LocalDate;
-
 public class CadastroEventoActivity extends AppCompatActivity {
 
     private final int RESULT_CODE_NOVO_EVENTO = 10;
@@ -52,19 +50,50 @@ public class CadastroEventoActivity extends AppCompatActivity {
     public void onClickVoltar(View v) {
         finish();
     }
-
-
+    
+    // TO DO: Fazer com que ao clicar salvar em novo evento, o código salve e apresente os dados na Activity_main
     public void onClickSalvar(View v) {
         EditText editTextNome = findViewById(R.id.etNome);
         EditText editTextData = findViewById(R.id.etData);
         EditText editTextLocal = findViewById(R.id.etLocal);
 
-        int id = 0;
         String nomeEvento = editTextNome.getText().toString();
         String dataEvento = editTextData.getText().toString();
         String localEvento = editTextLocal.getText().toString();
 
         Evento evento = new Evento(id, nomeEvento,dataEvento,localEvento);
+        Intent intent = new Intent();
+
+        if (edicao) {
+            intent.putExtra("eventoEditado", evento);
+            setResult(RESULT_CODE_EVENTO_EDITADO, intent);
+        } else {
+            intent.putExtra("novoEvento", evento);
+            setResult(RESULT_CODE_NOVO_EVENTO, intent);
+        }
+
+        finish();
+
+    }
+
+    public void onClickExcluir(View v) {
+        EditText editTextNome = findViewById(R.id.etNome);
+        EditText editTextData = findViewById(R.id.etData);
+        EditText editTextLocal = findViewById(R.id.etLocal);
+
+        String nomeEvento = editTextNome.getText().toString();
+        String dataEvento = editTextData.getText().toString();
+        String localEvento = editTextLocal.getText().toString();
+
+        Evento evento = new Evento(id, nomeEvento,dataEvento,localEvento);
+        Intent intentExcluir = new Intent();
+
+        if (edicao) {
+            intentExcluir.putExtra("eventoExcluido", evento);
+            setResult(RESULT_CODE_EXCLUIR_EVENTO, intentExcluir);
+
+        }
+
         finish();
     }
 }

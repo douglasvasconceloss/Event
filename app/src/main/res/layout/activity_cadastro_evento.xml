@@ -130,18 +130,18 @@
             android:text="Voltar" />
 
         <Button
-            android:id="@+id/btnSalvar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:onClick="onClickSalvar"
-            android:text="Salvar" />
+                android:id="@+id/btnSalvar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="onClickSalvar"
+                android:text="Salvar"/>
 
         <Button
-            android:id="@+id/btnExcluir"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Excluir" />
+                android:id="@+id/btnExcluir"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Excluir" android:onClick="onClickExcluir"/>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
