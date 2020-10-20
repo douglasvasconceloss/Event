@@ -23,6 +23,7 @@ public class CadastroEventoActivity extends AppCompatActivity {
         finish();
     }
 
+
     public void onClickSalvar(View v) {
         EditText editTextNome = findViewById(R.id.etNome);
         EditText editTextData = findViewById(R.id.etData);

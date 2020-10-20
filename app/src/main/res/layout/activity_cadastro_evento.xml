@@ -25,7 +25,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="10dp"
         android:fontFamily="sans-serif-light"
-        android:text="Cadastrar ou editar eventos"
+        android:text="Cadastrar ou editar Eventos"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvTitle01_1" />

@@ -12,8 +12,6 @@ import com.senai.sc.event.classeEvento.Evento;
 
 import java.util.ArrayList;
 
-import java.time.LocalDate;
-
 public class MainActivity extends AppCompatActivity {
 
     private ListView lvEventos;
