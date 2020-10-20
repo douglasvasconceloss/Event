@@ -1,5 +1,6 @@
 package com.senai.sc.event;
 
+import android.widget.AdapterView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -13,6 +14,12 @@ import com.senai.sc.event.classeEvento.Evento;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
+
+    private final int REQUEST_CODE_NOVO_EVENTO = 1;
+    private final int REQUEST_CODE_EDITAR_EVENTO = 2;
+    private final int RESULT_CODE_NOVO_EVENTO = 10;
+    private final int RESULT_CODE_EVENTO_EDITADO = 11;
+    private final int RESULT_CODE_EXCLUIR_EVENTO = 12;
 
     private ListView lvEventos;
     private ArrayAdapter<Evento> adapterEventos;
@@ -28,6 +35,20 @@ public class MainActivity extends AppCompatActivity {
 
         adapterEventos = new ArrayAdapter<Evento>(MainActivity.this, android.R.layout.simple_list_item_1, listaEventos);
         lvEventos.setAdapter(adapterEventos);
+
+        definirOnClickListenerView();
+    }
+
+    private void definirOnClickListenerView() {
+        lvEventos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Evento eventoClicado = adapterEventos.getItem(position);
+                Intent intent = new Intent(MainActivity.this, CadastroEventoActivity.class);
+                intent.putExtra("eventoEdicao", eventoClicado);
+                startActivityForResult(intent, REQUEST_CODE_EDITAR_EVENTO);
+            }
+        });
     }
 
     private ArrayList<Evento> criarListaEvento() {
@@ -41,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
     public void onClickCriarEvento(View v) {
         Intent intentCriarEvento = new Intent(MainActivity.this, CadastroEventoActivity.class);
         startActivity(intentCriarEvento);
-
     }
+
+
 }
