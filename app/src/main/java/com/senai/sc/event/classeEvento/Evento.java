@@ -1,13 +1,15 @@
 package com.senai.sc.event.classeEvento;
 
-public class Evento {
+import java.io.Serializable;
+
+public class Evento implements Serializable {
 
     private int id;
     private String nomeEvento;
     private String dataEvento;
     private String localEvento;
 
-    public Evento(int id, String nomeEvento, String dataEvento, String localEvento) {
+    public Evento (int id, String nomeEvento, String dataEvento, String localEvento) {
         this.id = id;
         this.nomeEvento = nomeEvento;
         this.dataEvento = dataEvento;
@@ -49,6 +51,6 @@ public class Evento {
 
     @Override
     public String toString() {
-        return nomeEvento + " | " + dataEvento + " | " + localEvento;
+        return nomeEvento + " | " + dataEvento + "\n" + localEvento;
     }
 }
