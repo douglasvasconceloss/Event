@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.senai.sc.event.classeEvento.Evento;
 
@@ -50,8 +51,7 @@ public class CadastroEventoActivity extends AppCompatActivity {
     public void onClickVoltar(View v) {
         finish();
     }
-    
-    // TO DO: Fazer com que ao clicar salvar em novo evento, o código salve e apresente os dados na Activity_main
+
     public void onClickSalvar(View v) {
         EditText editTextNome = findViewById(R.id.etNome);
         EditText editTextData = findViewById(R.id.etData);
@@ -61,20 +61,25 @@ public class CadastroEventoActivity extends AppCompatActivity {
         String dataEvento = editTextData.getText().toString();
         String localEvento = editTextLocal.getText().toString();
 
-        Evento evento = new Evento(id, nomeEvento,dataEvento,localEvento);
+        Evento evento = new Evento(id, nomeEvento, dataEvento, localEvento);
         Intent intent = new Intent();
 
-        if (edicao) {
-            intent.putExtra("eventoEditado", evento);
-            setResult(RESULT_CODE_EVENTO_EDITADO, intent);
+        if (nomeEvento.isEmpty() || dataEvento.isEmpty() || localEvento.isEmpty()) {
+            Toast.makeText(CadastroEventoActivity.this, "Os campos de nome, data e local são obrigatórios", Toast.LENGTH_LONG).show();
         } else {
-            intent.putExtra("novoEvento", evento);
-            setResult(RESULT_CODE_NOVO_EVENTO, intent);
+            if (edicao) {
+                intent.putExtra("eventoEditado", evento);
+                setResult(RESULT_CODE_EVENTO_EDITADO, intent);
+            } else {
+                intent.putExtra("novoEvento", evento);
+                setResult(RESULT_CODE_NOVO_EVENTO, intent);
+            }
+
+            finish();
         }
 
-        finish();
 
-    }
+}
 
     public void onClickExcluir(View v) {
         EditText editTextNome = findViewById(R.id.etNome);
@@ -91,9 +96,9 @@ public class CadastroEventoActivity extends AppCompatActivity {
         if (edicao) {
             intentExcluir.putExtra("eventoExcluido", evento);
             setResult(RESULT_CODE_EXCLUIR_EVENTO, intentExcluir);
-
         }
 
         finish();
     }
+
 }

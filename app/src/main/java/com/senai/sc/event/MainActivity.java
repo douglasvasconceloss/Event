@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         setTitle("Event! | Sua agenda de eventos");
 
         lvEventos = findViewById(R.id.lvEventos);
-        ArrayList<Evento> listaEventos = this.criarListaEvento();
+        ArrayList<Evento> listaEventos = new ArrayList<Evento>();
 
         adapterEventos = new ArrayAdapter<Evento>(MainActivity.this, android.R.layout.simple_list_item_1, listaEventos);
         lvEventos.setAdapter(adapterEventos);
@@ -54,29 +54,21 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private ArrayList<Evento> criarListaEvento() {
-        ArrayList<Evento> eventos = new ArrayList<Evento>();
-        eventos.add(new Evento(1, "Palestra POO", "12/11/2020", "SENAI/SC - Florianópolis"));
-        eventos.add(new Evento(2,"Palestra SQL", "13/11/2020", "SENAI/SC - São José"));
-        eventos.add(new Evento(3,"Mesa Redonda: Mulheres na TI", "14/11/2020", "SENAI/SC - Lages"));
-        return eventos;
-    }
-
     public void onClickCriarEvento(View v) {
         Intent intentCriarEvento = new Intent(MainActivity.this, CadastroEventoActivity.class);
-        startActivity(intentCriarEvento);
+        startActivityForResult(intentCriarEvento, REQUEST_CODE_NOVO_EVENTO);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if (requestCode == REQUEST_CODE_NOVO_EVENTO && resultCode == RESULT_CODE_NOVO_EVENTO) {
-            Toast.makeText(MainActivity.this, "Evento cadastrado com sucesso!", Toast.LENGTH_LONG).show();
+            Toast.makeText(MainActivity.this, "Evento cadastrado com sucesso!", Toast.LENGTH_SHORT).show();
             Evento eventoNovo = (Evento) data.getExtras().getSerializable("novoEvento");
             eventoNovo.setId(++id);
             this.adapterEventos.add(eventoNovo);
 
         } else if (requestCode == REQUEST_CODE_EDITAR_EVENTO && resultCode == RESULT_CODE_EVENTO_EDITADO) {
-            Toast.makeText(MainActivity.this, "Evento editado com sucesso!", Toast.LENGTH_LONG).show();
+            Toast.makeText(MainActivity.this, "Evento editado com sucesso!", Toast.LENGTH_SHORT).show();
             Evento eventoEditado = (Evento) data.getExtras().getSerializable("eventoEditado");
             for (int i = 0; i < adapterEventos.getCount(); i++) {
                 Evento evento = adapterEventos.getItem(i);
@@ -87,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         } else if (requestCode == REQUEST_CODE_EDITAR_EVENTO && resultCode == RESULT_CODE_EXCLUIR_EVENTO) {
-            Toast.makeText(MainActivity.this, "Evento excluído com sucesso!", Toast.LENGTH_LONG).show();
+            Toast.makeText(MainActivity.this, "Evento excluído com sucesso!", Toast.LENGTH_SHORT).show();
             Evento eventoExcluido = (Evento) data.getExtras().getSerializable("eventoExcluido");
             for (int i = 0; i < adapterEventos.getCount(); i++) {
                 Evento produto = adapterEventos.getItem(i);
@@ -97,7 +89,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         }
-
         super.onActivityResult(requestCode, resultCode, data);
     }
 }
