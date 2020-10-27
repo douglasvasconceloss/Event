@@ -9,14 +9,10 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.senai.sc.event.classeEvento.Evento;
+import com.senai.sc.event.database.EventoDAO;
 
 public class CadastroEventoActivity extends AppCompatActivity {
 
-    private final int RESULT_CODE_NOVO_EVENTO = 10;
-    private final int RESULT_CODE_EVENTO_EDITADO = 11;
-    private final int RESULT_CODE_EXCLUIR_EVENTO = 12;
-
-    private boolean edicao = false;
     private int id = 0;
 
     @Override
@@ -41,8 +37,6 @@ public class CadastroEventoActivity extends AppCompatActivity {
             editTextNome.setText(evento.getNomeEvento());
             editTextData.setText(evento.getDataEvento());
             editTextLocal.setText(evento.getLocalEvento());
-
-            edicao = true;
             id = evento.getId();
         }
     }
@@ -62,24 +56,20 @@ public class CadastroEventoActivity extends AppCompatActivity {
         String localEvento = editTextLocal.getText().toString();
 
         Evento evento = new Evento(id, nomeEvento, dataEvento, localEvento);
-        Intent intent = new Intent();
+        EventoDAO eventoDao = new EventoDAO(getBaseContext());
 
         if (nomeEvento.isEmpty() || dataEvento.isEmpty() || localEvento.isEmpty()) {
             Toast.makeText(CadastroEventoActivity.this, "Os campos de nome, data e local são obrigatórios", Toast.LENGTH_LONG).show();
         } else {
-            if (edicao) {
-                intent.putExtra("eventoEditado", evento);
-                setResult(RESULT_CODE_EVENTO_EDITADO, intent);
+            boolean salvou = eventoDao.salvarEvento(evento);
+            if (salvou) {
+                finish();
             } else {
-                intent.putExtra("novoEvento", evento);
-                setResult(RESULT_CODE_NOVO_EVENTO, intent);
+                Toast.makeText(CadastroEventoActivity.this, "Erro ao salvar.", Toast.LENGTH_LONG).show();
             }
-
-            finish();
         }
+    }
 
-
-}
 
     public void onClickExcluir(View v) {
         EditText editTextNome = findViewById(R.id.etNome);
@@ -91,14 +81,13 @@ public class CadastroEventoActivity extends AppCompatActivity {
         String localEvento = editTextLocal.getText().toString();
 
         Evento evento = new Evento(id, nomeEvento,dataEvento,localEvento);
-        Intent intentExcluir = new Intent();
 
-        if (edicao) {
-            intentExcluir.putExtra("eventoExcluido", evento);
-            setResult(RESULT_CODE_EXCLUIR_EVENTO, intentExcluir);
+        EventoDAO eventoDao = new EventoDAO(getBaseContext());
+        boolean excluiu = eventoDao.excluirEvento(evento);
+        if (excluiu) {
+            finish();
+        } else {
+            Toast.makeText(CadastroEventoActivity.this,"Impossível excluir. Não há nenhum evento selecionado.", Toast.LENGTH_LONG).show();
         }
-
-        finish();
     }
-
 }
