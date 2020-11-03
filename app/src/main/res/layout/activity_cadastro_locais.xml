@@ -4,10 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CadastroEventoActivity">
+    tools:context=".CadastroLocaisActivity">
 
     <TextView
-        android:id="@+id/tvTitle01_1"
+        android:id="@+id/tvNomeLocal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="60dp"
+        android:text="Nome do Local:"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitle02_4" />
+
+    <TextView
+        android:id="@+id/tvTitle01_4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -19,29 +29,19 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/tvTitle02_2"
+        android:id="@+id/tvTitle02_4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="10dp"
         android:fontFamily="sans-serif-light"
-        android:text="Cadastrar ou editar Eventos"
+        android:text="Cadastrar ou editar Locais"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvTitle01_1" />
-
-    <TextView
-        android:id="@+id/tvNome"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="60dp"
-        android:text="Nome do evento:"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvTitle02_2" />
+        app:layout_constraintTop_toBottomOf="@+id/tvTitle01_4" />
 
     <EditText
-        android:id="@+id/etNome"
+        android:id="@+id/etNomeLocal"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -51,54 +51,90 @@
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvNome" />
+        app:layout_constraintTop_toBottomOf="@+id/tvNomeLocal" />
 
     <TextView
-        android:id="@+id/tvData"
+        android:id="@+id/tvBairroLocal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="10dp"
-        android:text="Data do evento:"
+        android:text="Bairro:"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etNome" />
+        app:layout_constraintTop_toBottomOf="@+id/etNomeLocal" />
 
     <EditText
-        android:id="@+id/etData"
+        android:id="@+id/etBairroLocal"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="5dp"
         android:layout_marginEnd="20dp"
         android:ems="10"
-        android:inputType="date"
+        android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvData" />
+        app:layout_constraintTop_toBottomOf="@+id/tvBairroLocal" />
 
     <TextView
-        android:id="@+id/tvLocais"
+        android:id="@+id/tvCidadeLocal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="10dp"
-        android:text="Local do evento:"
+        android:text="Cidade:"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etData" />
+        app:layout_constraintTop_toBottomOf="@+id/etBairroLocal" />
+
+    <EditText
+        android:id="@+id/etCidadeLocal"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="20dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvCidadeLocal" />
+
+    <TextView
+        android:id="@+id/tvCapacidadeLocal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:text="Capacidade de pessoas:"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etCidadeLocal" />
+
+    <EditText
+        android:id="@+id/etCapacidadeLocal"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="20dp"
+        android:ems="10"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvCapacidadeLocal" />
 
     <LinearLayout
         android:layout_width="0dp"
-        android:layout_height="75dp"
+        android:layout_height="150dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="20dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerLocais">
+        app:layout_constraintTop_toBottomOf="@+id/etCapacidadeLocal">
 
         <Button
-            android:id="@+id/btnVoltar"
+            android:id="@+id/btnVoltarCasdastroLocal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -106,7 +142,7 @@
             android:text="Voltar" />
 
         <Button
-            android:id="@+id/btnSalvar"
+            android:id="@+id/btnSalvarCasdastroLocal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -114,7 +150,7 @@
             android:text="Salvar" />
 
         <Button
-            android:id="@+id/btnExcluir"
+            android:id="@+id/btnExcluirCadastroLocal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -122,14 +158,4 @@
             android:text="Excluir" />
     </LinearLayout>
 
-    <Spinner
-        android:id="@+id/spinnerLocais"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvLocais" />
 </androidx.constraintlayout.widget.ConstraintLayout>

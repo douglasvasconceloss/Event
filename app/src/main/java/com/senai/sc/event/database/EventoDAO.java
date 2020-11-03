@@ -5,14 +5,17 @@ import android.content.Context;
 import android.database.Cursor;
 
 import com.senai.sc.event.classeEvento.Evento;
+import com.senai.sc.event.classeEvento.Locais;
 import com.senai.sc.event.database.entity.EventoEntity;
+import com.senai.sc.event.database.entity.LocaisEntity;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class EventoDAO {
 
-    private final String SQL_LISTAR_TODOS = "SELECT * FROM " + EventoEntity.TABLE_NAME;
+    private final String SQL_LISTAR_TODOS = "SELECT evento._id, nomeEvento, dataEvento, idLocais, nomeLocal FROM " + EventoEntity.TABLE_NAME + " INNER JOIN "
+            + LocaisEntity.TABLE_NAME + " ON " + EventoEntity.COLUMN_NAME_ID_LOCAIS + " = " + LocaisEntity.TABLE_NAME + "." + LocaisEntity._ID;
     private DBGateway dbGateway;
 
     public EventoDAO(Context context) {
@@ -23,7 +26,7 @@ public class EventoDAO {
         ContentValues contentValues = new ContentValues();
         contentValues.put(EventoEntity.COLUMN_NAME_NOME, evento.getNomeEvento());
         contentValues.put(EventoEntity.COLUMN_NAME_DATA, evento.getDataEvento());
-        contentValues.put(EventoEntity.COLUMN_NAME_LOCAL, evento.getLocalEvento());
+        contentValues.put(EventoEntity.COLUMN_NAME_ID_LOCAIS, evento.getLocais().getId());
         if (evento.getId() > 0) {
             return dbGateway.getDatabase().update(EventoEntity.TABLE_NAME, contentValues, EventoEntity._ID + "=?", new String[]{String.valueOf(evento.getId())}) > 0;
         }
@@ -34,7 +37,7 @@ public class EventoDAO {
         ContentValues contentValues = new ContentValues();
         contentValues.put(EventoEntity.COLUMN_NAME_NOME, evento.getNomeEvento());
         contentValues.put(EventoEntity.COLUMN_NAME_DATA, evento.getDataEvento());
-        contentValues.put(EventoEntity.COLUMN_NAME_LOCAL, evento.getLocalEvento());
+        contentValues.put(EventoEntity.COLUMN_NAME_ID_LOCAIS, evento.getLocais().getId());
 
         if (evento.getId() > 0) {
             return dbGateway.getDatabase().delete(EventoEntity.TABLE_NAME, EventoEntity._ID + "=?", new String[]{String.valueOf(evento.getId())}) > 0;
@@ -50,8 +53,10 @@ public class EventoDAO {
             int id = cursor.getInt(cursor.getColumnIndex(EventoEntity._ID));
             String nomeEvento = cursor.getString(cursor.getColumnIndex(EventoEntity.COLUMN_NAME_NOME));
             String dataEvento = cursor.getString(cursor.getColumnIndex(EventoEntity.COLUMN_NAME_DATA));
-            String localEvento = cursor.getString(cursor.getColumnIndex(EventoEntity.COLUMN_NAME_LOCAL));
-            eventos.add(new Evento(id, nomeEvento, dataEvento, localEvento));
+            int idLocais = cursor.getInt(cursor.getColumnIndex(EventoEntity.COLUMN_NAME_ID_LOCAIS));
+            String nomeLocal = cursor.getString(cursor.getColumnIndex(LocaisEntity.COLUMN_NAME_NOME_LOCAL));
+            Locais locais = new Locais(idLocais, nomeLocal);
+            eventos.add(new Evento(id, nomeEvento, dataEvento, locais));
         }
         cursor.close();
         return eventos;

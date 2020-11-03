@@ -9,5 +9,6 @@ public final class EventoEntity implements BaseColumns {
     public static final String TABLE_NAME = "evento";
     public static final String COLUMN_NAME_NOME = "nomeEvento";
     public static final String COLUMN_NAME_DATA = "dataEvento";
-    public static final String COLUMN_NAME_LOCAL = "localEvento";
+    public static final String COLUMN_NAME_ID_LOCAIS = "idLocais";
+
 }

@@ -55,4 +55,10 @@ public class MainActivity extends AppCompatActivity {
         Intent intentCriarEvento = new Intent(MainActivity.this, CadastroEventoActivity.class);
         startActivity(intentCriarEvento);
     }
+
+    public void onClickLocais(View v) {
+        Intent intentLocais = new Intent(MainActivity.this, ListarLocaisActivity.class);
+        startActivity(intentLocais);
+        finish();
+    }
 }
