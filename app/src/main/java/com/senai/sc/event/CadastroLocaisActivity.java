@@ -50,23 +50,27 @@ public class CadastroLocaisActivity extends AppCompatActivity {
         EditText editTextBairro = findViewById(R.id.etBairroLocal);
         EditText editTextCidade = findViewById(R.id.etCidadeLocal);
         EditText editTextCapacidade = findViewById(R.id.etCapacidadeLocal);
-
         String nome = editTextNome.getText().toString();
         String bairro = editTextBairro.getText().toString();
         String cidade = editTextCidade.getText().toString();
-        int capacidade = Integer.parseInt(editTextCapacidade.getText().toString());
-
-        Locais locais = new Locais(id, nome, bairro, cidade, capacidade);
-        LocaisDAO locaisDAO = new LocaisDAO(getBaseContext());
-
-        boolean salvou = locaisDAO.salvar(locais);
-        if (salvou) {
-            finish();
+        if (editTextCapacidade.getText().length() == 0) {
+            Toast.makeText(CadastroLocaisActivity.this, "A capacidade de público do local é obrigatória.", Toast.LENGTH_LONG).show();
         } else {
-            Toast.makeText(CadastroLocaisActivity.this, "Erro ao salvar.", Toast.LENGTH_LONG).show();
+            int capacidade = Integer.parseInt(editTextCapacidade.getText().toString());
+            Locais locais = new Locais(id, nome, bairro, cidade, capacidade);
+            LocaisDAO locaisDAO = new LocaisDAO(getBaseContext());
+            if (nome.isEmpty() || bairro.isEmpty() || cidade.isEmpty()) {
+                Toast.makeText(CadastroLocaisActivity.this, "Os campos nome, bairro e cidade são obrigatórios.", Toast.LENGTH_LONG).show();
+            } else {
+                boolean salvou = locaisDAO.salvar(locais);
+                if (salvou) {
+                    finish();
+                } else {
+                    Toast.makeText(CadastroLocaisActivity.this, "Erro ao salvar.", Toast.LENGTH_LONG).show();
+                }
+            }
         }
     }
-
 
     public void onClickExcluir(View v) {
         EditText editTextNome = findViewById(R.id.etNomeLocal);
