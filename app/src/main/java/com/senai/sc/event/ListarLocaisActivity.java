@@ -21,6 +21,7 @@ public class ListarLocaisActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listar_locais);
+        setTitle("Locais de Eventos");
         listViewLocais = findViewById(R.id.lvLocais);
         definirOnClickListenerListView();
     }

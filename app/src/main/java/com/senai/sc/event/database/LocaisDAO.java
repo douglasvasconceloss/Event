@@ -32,13 +32,6 @@ public class LocaisDAO {
     }
 
     public boolean excluir(Locais locais) {
-
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(LocaisEntity.COLUMN_NAME_NOME_LOCAL, locais.getNome());
-        contentValues.put(LocaisEntity.COLUMN_NAME_BAIRRO, locais.getBairro());
-        contentValues.put(LocaisEntity.COLUMN_NAME_CIDADE, locais.getCidade());
-        contentValues.put(LocaisEntity.COLUMN_NAME_CAPACIDADE, locais.getCapacidadePublico());
-
         if (locais.getId() > 0) {
             return dbGateway.getDatabase().delete(LocaisEntity.TABLE_NAME, LocaisEntity._ID + "=?", new String[]{String.valueOf(locais.getId())}) > 0;
         }

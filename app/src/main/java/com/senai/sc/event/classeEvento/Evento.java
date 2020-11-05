@@ -9,7 +9,6 @@ public class Evento implements Serializable {
     private String dataEvento;
     private Locais locais;
 
-
     public Evento (int id, String nomeEvento, String dataEvento, Locais locais) {
         this.id = id;
         this.nomeEvento = nomeEvento;
@@ -20,7 +19,6 @@ public class Evento implements Serializable {
     public int getId() {
         return id;
     }
-
 
     public void setId(int id) {
         this.id = id;
@@ -49,6 +47,7 @@ public class Evento implements Serializable {
     public void setLocais(Locais locais) {
         this.locais = locais;
     }
+
 
     @Override
     public String toString() {

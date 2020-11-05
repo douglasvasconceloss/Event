@@ -17,7 +17,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tvTitle02_4" />
 
     <TextView
-        android:id="@+id/tvTitle01_4"
+        android:id="@+id/tvTitlePesquisa01"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -38,7 +38,7 @@
         android:text="Cadastrar ou editar Locais"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvTitle01_4" />
+        app:layout_constraintTop_toBottomOf="@+id/tvTitlePesquisa01" />
 
     <EditText
         android:id="@+id/etNomeLocal"

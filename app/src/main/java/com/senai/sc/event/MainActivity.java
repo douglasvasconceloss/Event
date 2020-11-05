@@ -1,26 +1,26 @@
 package com.senai.sc.event;
 
 import android.widget.AdapterView;
-import android.widget.Toast;
-import androidx.annotation.Nullable;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.senai.sc.event.classeEvento.Evento;
 import com.senai.sc.event.database.EventoDAO;
-
-import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
     private ListView lvEventos;
     private ArrayAdapter<Evento> adapterEventos;
-    private int id = 0;
+    public static String textoPesquisaEvento;
+    public static String textoPesquisaCidade;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,4 +61,53 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intentLocais);
         finish();
     }
+
+    public void onClickPesquisarEvento(View v) {
+        EditText editTextPesquisaEvento = findViewById(R.id.etBuscaEvento);
+
+        if (editTextPesquisaEvento.getText().length() != 0) {
+            textoPesquisaEvento = editTextPesquisaEvento.getText().toString();
+            EventoDAO eventoDao = new EventoDAO(getBaseContext());
+            adapterEventos = new ArrayAdapter<Evento>(MainActivity.this, android.R.layout.simple_list_item_1, eventoDao.buscarEvento());
+            lvEventos.setAdapter(adapterEventos);
+        } else {
+            Toast.makeText(MainActivity.this, "Insira dados no campo ao lado para pesquisar.", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    public void onClickPesquisarCidade(View v) {
+        EditText editTextPesquisaCidade = findViewById(R.id.etPesquisaMunicipio);
+
+        if (editTextPesquisaCidade.getText().length() != 0) {
+            textoPesquisaCidade = editTextPesquisaCidade.getText().toString();
+            EventoDAO eventoDao = new EventoDAO(getBaseContext());
+            adapterEventos = new ArrayAdapter<Evento>(MainActivity.this, android.R.layout.simple_list_item_1, eventoDao.buscarCidade());
+            lvEventos.setAdapter(adapterEventos);
+        } else {
+            Toast.makeText(MainActivity.this, "Insira dados no campo ao lado para pesquisar.", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    public void onClickLimparPesquisa(View v) {
+        EventoDAO eventoDao = new EventoDAO(getBaseContext());
+        adapterEventos = new ArrayAdapter<Evento>(MainActivity.this, android.R.layout.simple_list_item_1, eventoDao.listarEventos());
+        lvEventos.setAdapter(adapterEventos);
+        EditText editTextPesquisaEvento = findViewById(R.id.etBuscaEvento);
+        EditText editTextPesquisaCidade = findViewById(R.id.etPesquisaMunicipio);
+        editTextPesquisaEvento.setText("");
+        editTextPesquisaCidade.setText("");
+    }
+
+    public void onClickOrdenarCrescente(View v) {
+        EventoDAO eventoDao = new EventoDAO(getBaseContext());
+        adapterEventos = new ArrayAdapter<Evento>(MainActivity.this, android.R.layout.simple_list_item_1, eventoDao.ordenarEventoCrescente());
+        lvEventos.setAdapter(adapterEventos);
+    }
+
+    public void onClickOrdenarDecrescente(View v) {
+        EventoDAO eventoDao = new EventoDAO(getBaseContext());
+        adapterEventos = new ArrayAdapter<Evento>(MainActivity.this, android.R.layout.simple_list_item_1, eventoDao.ordenarEventoDecrescente());
+        lvEventos.setAdapter(adapterEventos);
+    }
+
 }

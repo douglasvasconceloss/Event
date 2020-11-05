@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/pesquisaCidade"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
@@ -11,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:fontFamily="sans-serif-light"
         android:text="Event!"
         android:textSize="30sp"
@@ -23,7 +24,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         android:fontFamily="sans-serif-light"
         android:text="Agenda de Eventos"
         android:textSize="18sp"
@@ -44,38 +45,25 @@
     <ListView
         android:id="@+id/lvEventos"
         android:layout_width="0dp"
-        android:layout_height="300dp"
+        android:layout_height="200dp"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         android:layout_marginEnd="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvTitle03" />
 
-    <Button
-        android:id="@+id/btnCadastro"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="15dp"
-        android:onClick="onClickCriarEvento"
-        android:text="Cadastrar Novo Evento"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lvEventos" />
-
     <TextView
-        android:id="@+id/tvTitle04"
+        android:id="@+id/tvTitlePesquisa01"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="25dp"
         android:layout_marginEnd="20dp"
         android:text="Desenvolvido por:"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnLocais" />
+        app:layout_constraintTop_toBottomOf="@+id/layoutBtn" />
 
     <TextView
         android:id="@+id/tvTitle05"
@@ -87,19 +75,149 @@
         android:text="Douglas Campos | Gustavo Cainã | Thiago Fronza"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvTitle04" />
+        app:layout_constraintTop_toBottomOf="@+id/tvTitlePesquisa01" />
+
+    <LinearLayout
+        android:id="@+id/layoutBtn"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="20dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnLimparPesquisa">
+
+        <Button
+            android:id="@+id/btnLocais"
+            android:layout_width="185dp"
+            android:layout_height="wrap_content"
+            android:onClick="onClickLocais"
+            android:text="Locais de Eventos"
+            android:textSize="12sp" />
+
+        <Button
+            android:id="@+id/btnCadastro"
+            android:layout_width="185dp"
+            android:layout_height="wrap_content"
+            android:onClick="onClickCriarEvento"
+            android:text="Cadastrar Novo Evento"
+            android:textSize="12sp" />
+
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/etBuscaEvento"
+        android:layout_width="0dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="2dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:textSize="14sp"
+        android:textStyle="italic"
+        app:layout_constraintEnd_toStartOf="@+id/btnPesquisarEvento"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvPesquisaEvento" />
 
     <Button
-        android:id="@+id/btnLocais"
+        android:id="@+id/btnPesquisarEvento"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="3dp"
+        android:layout_marginEnd="20dp"
+        android:onClick="onClickPesquisarEvento"
+        android:text="OK"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/etBuscaEvento"
+        app:layout_constraintTop_toBottomOf="@+id/tvPesquisaEvento" />
+
+    <TextView
+        android:id="@+id/tvPesquisaEvento"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="5dp"
-        android:layout_marginEnd="15dp"
-        android:onClick="onClickLocais"
-        android:text="Locais de Eventos"
+        android:layout_weight="1"
+        android:text="Pesquisar evento:"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lvEventos" />
+
+    <Button
+        android:id="@+id/btnPesquisarCidade"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="3dp"
+        android:layout_marginEnd="20dp"
+        android:onClick="onClickPesquisarCidade"
+        android:text="OK"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/etPesquisaMunicipio"
+        app:layout_constraintTop_toBottomOf="@+id/tvPesquisaCidade" />
+
+    <TextView
+        android:id="@+id/tvPesquisaCidade"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="5dp"
+        android:text="Pesquisar evento por cidade:"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etBuscaEvento" />
+
+    <EditText
+        android:id="@+id/etPesquisaMunicipio"
+        android:layout_width="0dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="2dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toStartOf="@+id/btnPesquisarCidade"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvPesquisaCidade" />
+
+    <Button
+        android:id="@+id/btnOrdenarASC"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="120dp"
+        android:layout_marginTop="10dp"
+        android:onClick="onClickOrdenarCrescente"
+        android:text="Cresc."
+        android:textSize="14sp"
+        app:layout_constraintEnd_toStartOf="@+id/btnOrdenarDEC"
+        app:layout_constraintStart_toEndOf="@+id/tvTitle01_1"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnOrdenarDEC"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="20dp"
+        android:onClick="onClickOrdenarDecrescente"
+        android:text="Decres."
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnLimparPesquisa"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:layout_marginTop="10dp"
+        android:onClick="onClickLimparPesquisa"
+        android:text="Limpar Pesquisa"
+        android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnCadastro" />
+        app:layout_constraintTop_toBottomOf="@+id/etPesquisaMunicipio" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
